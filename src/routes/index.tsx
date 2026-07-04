@@ -41,58 +41,76 @@ const projects = [
   {
     title: "Stroke — The Digital Sketchbook",
     tag: "AI / CREATIVE",
-    img: "https://webdev-farishay.netlify.app/images/stroke.jpeg",
+    img: "src/assets/p1.jpeg",
     desc: "An interactive AI-powered drawing platform that lets users generate creative visuals effortlessly. Real-time outputs, smart interactions, and a modern interface that blends creativity with technology.",
     stack: ["GSAP", "React", "CSS Modules", "Llama 3.1 8B"],
-    link: "#",
+    link: "https://stroke-app-drab.vercel.app/",
   },
   {
     title: "Mizaaj — The Food Website",
     tag: "RESTAURANT",
-    img: "https://webdev-farishay.netlify.app/images/mizaaj.jpeg",
+    img: "src/assets/p2.jpeg",
     desc: "A modern, responsive food website with clean UI, smooth navigation and an engaging layout that showcases menu and services. Built for aesthetics, performance and user interaction.",
     stack: ["React", "GSAP", "Tailwind"],
-    link: "#",
+    link: "https://mizaaj-restaurant.netlify.app/",
   },
   {
     title: "AIMailPro — Email Marketing",
     tag: "SAAS",
-    img: "https://webdev-farishay.netlify.app/images/p1.jpeg",
+    img: "src/assets/p3.jpeg",
     desc: "Advanced email marketing automation with a drag-and-drop builder and an analytics dashboard. Built for marketers who want to move fast without giving up control.",
     stack: ["React", "GSAP"],
-    link: "#",
+    link: "https://ai-mail-pro-v2.vercel.app/",
   },
-  {
-    title: "Netflix-Themed Portfolio",
-    tag: "EDITORIAL",
-    img: "https://webdev-farishay.netlify.app/images/p2.jpeg",
-    desc: "Cinematic portfolio website with Netflix-inspired UI, smooth transitions and interactive 3D hover effects. A love letter to a very specific kind of interface.",
-    stack: ["HTML", "CSS", "JavaScript"],
-    link: "#",
-  },
+
   {
     title: "Resume Forge — Resume Builder",
     tag: "TOOL",
-    img: "https://webdev-farishay.netlify.app/images/p5.png",
+    img: "src/assets/p4.jpeg",
     desc: "Create stunning resumes in minutes with customizable templates, live preview and one-click export to PDF.",
     stack: ["React.js", "PDF", "HTML2Canvas", "CSS"],
-    link: "#",
+    link: "https://resume-forge-v2.netlify.app/",
   },
   {
     title: "Coffee Chat App",
     tag: "SOCIAL",
-    img: "https://webdev-farishay.netlify.app/images/p4.png",
+    img: "src/assets/p5.jpg",
     desc: "Cozy, coffee-themed chat application with real-time messaging, emoji reactions and a warm aesthetic that makes people want to stay a while.",
     stack: ["HTML", "CSS", "JS", "Firebase", "Tailwind"],
-    link: "#",
+    link: "https://chat-app-mu-nine-69.vercel.app/",
+  },
+
+  {
+    title: "RSSC — Rangers Shooting & Saddle Club",
+    tag: "HOSPITALITY / EVENTS",
+    img: "src/assets/p6.jpeg",
+    desc: "Pakistan's premier shooting club website with cinematic dark UI, membership flows, facility showcases and night-shoot bookings. Bold typography meets precision.",
+    stack: ["React", "GSAP", "Tailwind"],
+    link: "https://rssc-shooting-range.vercel.app/",
   },
   {
-    title: "Japanese Makeup Store",
-    tag: "E-COMMERCE",
-    img: "https://webdev-farishay.netlify.app/images/p3.png",
-    desc: "Elegant, product-forward storefront for a Japanese-inspired makeup brand. Considered typography, calm palette, fast product pages.",
-    stack: ["React", "GSAP", "Tailwind", "Flowbite"],
-    link: "#",
+    title: "Adéna — Holistic Skincare",
+    tag: "E-COMMERCE / WELLNESS",
+    img: "src/assets/p7.jpg",
+    desc: "A serene, product-forward skincare storefront blending organic aesthetics with modern shopping flows. Soft gradients, delicate typography and a calming palette.",
+    stack: ["React", "Tailwind", "GSAP"],
+    link: "https://adena-skincaree.netlify.app/",
+  },
+  {
+    title: "Client Portfolio — Saqlain Ahmed",
+    tag: "PORTFOLIO",
+    img: "src/assets/p8.jpeg",
+    desc: "Dark-mode graphic designer portfolio with animated typewriter headings, circular profile layout and red-accent branding. Built to make a first impression.",
+    stack: ["HTML", "CSS", "JavaScript"],
+    link: "https://client-portfolio-zeta-ivory.vercel.app/",
+  },
+  {
+    title: "Turkana — Anatolian Journal",
+    tag: "EDITORIAL / TRAVEL",
+    img: "src/assets/p9.jpg",
+    desc: "A slow-journalism travel magazine platform inspired by Anatolia. Rich imagery, editorial layouts and destination storytelling across Istanbul, Cappadocia and beyond.",
+    stack: ["React", "Tailwind", "GSAP"],
+    link: "https://farishay-turkana.vercel.app/",
   },
 ];
 
@@ -112,7 +130,7 @@ const botKB: { q: RegExp; a: string }[] = [
   },
   {
     q: /contact|email|reach|hire/i,
-    a: "Easiest is email — hello@farishayy.dev — or DM on Instagram @websbyfarishayy.",
+    a: "Easiest is email — farwa.tariq2434@gmail.com — or DM on Instagram @websbyfarishayy.",
   },
   {
     q: /cv|resume|download/i,
@@ -139,7 +157,7 @@ const botKB: { q: RegExp; a: string }[] = [
 function botReply(input: string): string {
   const hit = botKB.find((k) => k.q.test(input));
   if (hit) return hit.a;
-  return "Good question — best to ask Farwa directly at hello@farishayy.dev. Meanwhile you can browse Selected Work above.";
+  return "Good question — best to ask Farwa directly at farwa.tariq2434@gmail.com. Meanwhile you can browse Selected Work above.";
 }
 
 /* ==================================================================== */
@@ -149,9 +167,24 @@ function Index() {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  useEffect(() => {
+    const prevBodyOverflow = document.body.style.overflow;
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+
+    document.body.style.overflow = menuOpen ? "hidden" : prevBodyOverflow;
+    document.documentElement.style.overflow = menuOpen
+      ? "hidden"
+      : prevHtmlOverflow;
+
+    return () => {
+      document.body.style.overflow = prevBodyOverflow;
+      document.documentElement.style.overflow = prevHtmlOverflow;
+    };
+  }, [menuOpen]);
+
   // auto-fly the intro after a moment (or on click)
   useEffect(() => {
-    const t = setTimeout(() => setIntroGone(true), 3200);
+    const t = setTimeout(() => setIntroGone(true), 3800);
     return () => clearTimeout(t);
   }, []);
 
@@ -206,10 +239,18 @@ function Index() {
         <button
           className="side-burger"
           onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Menu"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
         >
-          <span />
-          <span />
+          {menuOpen ? (
+            <span className="side-burger-close">✕</span>
+          ) : (
+            <>
+              <span />
+              <span />
+              <span />
+            </>
+          )}
         </button>
       </aside>
 
@@ -217,6 +258,13 @@ function Index() {
       {menuOpen && (
         <div className="menu-mob" onClick={() => setMenuOpen(false)}>
           <div className="menu-mob-inner" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="menu-mob-close"
+              onClick={() => setMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ✕
+            </button>
             {[
               ["Home", "#top"],
               ["Profile", "#about"],
@@ -581,8 +629,11 @@ function Index() {
               weight? That's exactly the problem this practice exists to fix.
             </p>
             <div className="connect-actions" data-reveal>
-              <a href="mailto:hello@farishayy.dev" className="connect-email">
-                hello@farishayy.dev
+              <a
+                href="mailto:farwa.tariq2434@gmail.com"
+                className="connect-email"
+              >
+                farwa.tariq2434@gmail.com
               </a>
               <div className="connect-links">
                 <a
@@ -595,10 +646,18 @@ function Index() {
                 <a href="/Farwa_Tariq_CV.pdf" download>
                   Download CV
                 </a>
-                <a href="#" target="_blank" rel="noopener">
+                <a
+                  href="https://www.linkedin.com/in/farwa-tariq-3b9540234"
+                  target="_blank"
+                  rel="noopener"
+                >
                   LinkedIn
                 </a>
-                <a href="#" target="_blank" rel="noopener">
+                <a
+                  href="https://github.com/farishay"
+                  target="_blank"
+                  rel="noopener"
+                >
                   GitHub
                 </a>
               </div>
@@ -630,11 +689,15 @@ function Index() {
 /* ==================== Magazine intro ==================== */
 function MagazineIntro({ onDone }: { onDone: () => void }) {
   const [flying, setFlying] = useState(false);
-
+  const [progress, setProgress] = useState(0);
   useEffect(() => {
-    const t = setTimeout(() => setFlying(true), 2400);
-    const t2 = setTimeout(onDone, 3200);
+    const int = setInterval(() => {
+      setProgress((p) => (p >= 100 ? 100 : p + 2));
+    }, 55);
+    const t = setTimeout(() => setFlying(true), 2900);
+    const t2 = setTimeout(onDone, 3700);
     return () => {
+      clearInterval(int);
       clearTimeout(t);
       clearTimeout(t2);
     };
@@ -642,43 +705,42 @@ function MagazineIntro({ onDone }: { onDone: () => void }) {
 
   return (
     <div
-      className={`intro ${flying ? "intro-fly" : ""}`}
+      className={`intro-v2 ${flying ? "intro-v2-fly" : ""}`}
       onClick={() => {
         setFlying(true);
         setTimeout(onDone, 700);
       }}
     >
-      <div className="intro-page">
-        <div className="intro-top">
-          <span>VOL. 01</span>
-          <span>KARACHI ED. — 2026</span>
-        </div>
-
-        <div className="intro-hero">
-          <div className="intro-img">
-            <img src={coverPortrait.url} alt="Farwa Tariq cover" />
+      <div className="intro-v2-bg">
+        <img src={sitting.url} alt="Farwa Tariq cover" />
+      </div>
+      <div className="intro-v2-vignette" />
+      <div className="intro-v2-top">
+        <span>VOL. 01</span>
+        <span>KARACHI ED. — 2026</span>
+      </div>
+      <div className="intro-v2-center">
+        <span className="intro-v2-eyebrow">THE PORTFOLIO ISSUE</span>
+        <h1 className="intro-v2-title">
+          FARWA
+          <br />
+          TARIQ
+        </h1>
+        <p className="intro-v2-sub">Web Developer · UI/UX Designer</p>
+        <div className="intro-v2-load">
+          <div className="intro-v2-bar">
+            <span style={{ width: `${progress}%` }} />
           </div>
-
-          <div className="intro-copy">
-            <span className="intro-eyebrow">THE PORTFOLIO ISSUE</span>
-            <h1>
-              FARWA
-              <br />
-              TARIQ
-            </h1>
-            <p>
-              A full-stack developer & designer, at rest — and about to get to
-              work. Turn the page.
-            </p>
-            <span className="intro-tap">TAP or WAIT · turning page…</span>
+          <div className="intro-v2-loadmeta">
+            <span>LOADING ISSUE</span>
+            <span>{String(progress).padStart(3, "0")}%</span>
           </div>
         </div>
-
-        <div className="intro-bottom">
-          <span>№ 01</span>
-          <span>WEB · DESIGN · CODE</span>
-          <span>PKR ∞ / USD ∞</span>
-        </div>
+      </div>
+      <div className="intro-v2-bottom">
+        <span>№ 01</span>
+        <span>WEB · DESIGN · CODE</span>
+        <span>TAP TO SKIP</span>
       </div>
     </div>
   );
@@ -851,7 +913,10 @@ function MagStyles() {
   background:var(--paper); color:var(--ink);
   font-family:var(--f-body); font-size:16px; line-height:1.5;
   min-height:100vh; overflow-x:hidden;
+  scrollbar-width:none; -ms-overflow-style:none;
 }
+html, body{ scrollbar-width:none; -ms-overflow-style:none; }
+html::-webkit-scrollbar, body::-webkit-scrollbar, .mag-root::-webkit-scrollbar{ display:none; }
 .mag-root *{ box-sizing:border-box; }
 .mag-root a{ color:inherit; text-decoration:none; }
 .mag-root ul{ list-style:none; padding:0; margin:0; }
@@ -910,6 +975,75 @@ function MagStyles() {
 .intro-copy h1{
   font-family:var(--f-display); font-weight:600; line-height:.9;
   font-size:clamp(48px,7vw,96px); letter-spacing:-.02em;
+
+}
+  /* ---------- MAGAZINE INTRO V2 (fullscreen blurred portrait + loader) ---------- */
+.intro-v2{
+  position:fixed; inset:0; z-index:9999; background:#000;
+  overflow:hidden; cursor:pointer;
+  color:#f1efe9;
+  transition:opacity .7s ease, transform .7s var(--ease), filter .7s ease;
+}
+.intro-v2-fly{ opacity:0; transform:scale(1.08); filter:blur(20px); }
+.intro-v2-bg{ position:absolute; inset:-4%; }
+.intro-v2-bg img{
+  width:100%; height:100%; object-fit:cover; object-position:center 20%;
+   filter:blur(6px) brightness(.75) grayscale(.2) contrast(1.05);
+  transform:scale(1.15);
+  animation:introZoom 4s ease-out both;
+}
+@keyframes introZoom{
+  from{ transform:scale(1.3); filter:blur(24px) brightness(.35); }
+  to{ transform:scale(1.15); filter:blur(6px) brightness(.75) grayscale(.2) contrast(1.05); }
+}
+.intro-v2-vignette{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,.65) 90%),
+    linear-gradient(180deg, rgba(0,0,0,.5), transparent 30%, transparent 70%, rgba(0,0,0,.6));
+}
+.intro-v2-top,.intro-v2-bottom{
+  position:absolute; left:0; right:0; padding:22px clamp(20px,5vw,56px);
+  display:flex; justify-content:space-between;
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(241,239,233,.75); z-index:2;
+}
+.intro-v2-top{ top:0; border-bottom:1px solid rgba(241,239,233,.14); }
+.intro-v2-bottom{ bottom:0; border-top:1px solid rgba(241,239,233,.14); }
+.intro-v2-center{
+  position:relative; z-index:2;
+  height:100%; display:flex; flex-direction:column; justify-content:center; align-items:center;
+  text-align:center; padding:0 24px; gap:16px;
+  animation:introFadeUp 1s var(--ease) .3s both;
+}
+@keyframes introFadeUp{
+  from{ opacity:0; transform:translateY(24px); }
+  to{ opacity:1; transform:none; }
+}
+.intro-v2-eyebrow{
+  font-family:var(--f-mono); font-size:11px; letter-spacing:.28em; color:#e2a5a5;
+}
+.intro-v2-title{
+  font-family:var(--f-display); font-weight:600; line-height:.86;
+  font-size:clamp(64px,12vw,180px); letter-spacing:-.02em;
+  text-shadow:0 6px 40px rgba(0,0,0,.6);
+}
+.intro-v2-sub{
+  font-family:var(--f-mono); font-size:12px; letter-spacing:.24em;
+  color:rgba(241,239,233,.75); text-transform:uppercase; margin:0;
+}
+.intro-v2-load{ margin-top:28px; width:min(320px,70%); }
+.intro-v2-bar{
+  height:2px; background:rgba(241,239,233,.18); overflow:hidden;
+}
+.intro-v2-bar span{
+  display:block; height:100%; background:#f1efe9;
+  transition:width .1s linear;
+}
+.intro-v2-loadmeta{
+  display:flex; justify-content:space-between; margin-top:8px;
+  font-family:var(--f-mono); font-size:10px; letter-spacing:.2em;
+  color:rgba(241,239,233,.6);
 }
 .intro-copy p{ color:#46453f; font-size:16px; max-width:34ch; }
 .intro-tap{ margin-top:auto; font-family:var(--f-mono); font-size:10px; letter-spacing:.2em; color:#86847a; }
@@ -952,10 +1086,11 @@ function MagStyles() {
   }
   .side-links, .side-meta{ display:none; }
   .side-burger{
-    display:flex; flex-direction:column; justify-content:center; gap:5px;
-    width:32px; height:32px; background:none; border:none; cursor:pointer;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    gap:5px; width:32px; height:32px; background:none; border:none; cursor:pointer;
   }
   .side-burger span{ display:block; width:24px; height:1.6px; background:var(--ink); }
+  .side-burger-close{ font-size:20px; line-height:1; color:var(--ink); }
 }
 .menu-mob{
   position:fixed; inset:0; z-index:95; background:rgba(13,13,12,.9);
@@ -965,6 +1100,10 @@ function MagStyles() {
 .menu-mob-inner{
   background:var(--ink); color:var(--paper); padding:32px 40px;
   display:flex; flex-direction:column; gap:10px; min-width:260px;
+}
+.menu-mob-close{
+  align-self:flex-end; background:none; border:none; color:var(--paper);
+  font-size:24px; line-height:1; cursor:pointer; padding:0;
 }
 .menu-mob-inner a{
   font-family:var(--f-display); font-size:32px; line-height:1;
@@ -993,14 +1132,24 @@ function MagStyles() {
   background:radial-gradient(circle at 30% 40%, rgba(161,31,31,.12), transparent 60%);
 }
 .cover-b-portrait{
-  display:flex; align-items:center; justify-content:center;
-  height:min(90vh,900px);
+   display:flex; align-items:flex-end; justify-content:center;
+  height:min(92vh,900px);
+  position:relative;
+}
+.cover-b-portrait::after{
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse at 50% 45%, transparent 45%, #0a0a0a 78%),
+    linear-gradient(180deg, #0a0a0a 0%, transparent 18%, transparent 70%, #0a0a0a 100%),
+    linear-gradient(90deg, #0a0a0a 0%, transparent 14%, transparent 86%, #0a0a0a 100%);
+  mix-blend-mode:normal;
 }
 .cover-b-portrait img{
   max-height:100%; max-width:100%; width:auto; height:auto;
   object-fit:contain;
-  filter:contrast(1.05) brightness(1.02);
-  /* fully visible, blended with black bg */
+   filter:contrast(1.05) brightness(1.02) grayscale(.15);
+
+  mask-image:radial-gradient(ellipse at 50% 45%, #000 55%, transparent 85%);
 }
 .cover-b-content{ display:flex; flex-direction:column; gap:22px; z-index:2; }
 .cover-b-content .eyebrow{
@@ -1172,7 +1321,7 @@ function MagStyles() {
 .connect{ background:var(--ink); color:var(--paper); padding:120px var(--gutter) 40px; }
 .connect .section-number{ color:var(--accent); }
 .connect-inner{ max-width:1000px; margin:0 auto; }
-.connect-title{ font-family:var(--f-display); font-weight:600; font-size:clamp(48px,7vw,96px); line-height:.9; margin:14px 0 24px; }
+.connect-title{ font-family:var(--f-display); font-weight:600; font-size:clamp(48px,7vw,96px); line-height:.9; margin:14px 0 24px; transform:translateY(-6px); }
 .connect-inner p{ color:#c9c6bd; font-size:17px; max-width:56ch; }
 .connect-actions{ margin-top:34px; display:flex; flex-direction:column; gap:22px; }
 .connect-email{
@@ -1183,6 +1332,19 @@ function MagStyles() {
 .connect-links{ display:flex; flex-wrap:wrap; gap:22px; font-family:var(--f-mono); font-size:12px; letter-spacing:.12em; text-transform:uppercase; }
 .connect-links a{ border-bottom:1px solid rgba(241,239,233,.2); padding-bottom:3px; }
 .connect-links a:hover{ color:var(--accent); border-color:var(--accent); }
+
+@media (max-width:900px){
+  .connect-title{ transform:translateY(-4px); }
+}
+
+@media (max-width:640px){
+  .connect{ padding:92px var(--gutter) 36px; }
+  .connect-title{ font-size:clamp(38px,8vw,56px); margin:10px 0 16px; transform:translateY(0); }
+  .connect-inner p{ font-size:16px; }
+  .connect-actions{ margin-top:24px; gap:16px; }
+  .connect-email{ font-size:clamp(20px,4.6vw,30px); padding-bottom:4px; }
+}
+
 .footer{
   margin-top:80px; padding-top:22px; border-top:1px solid rgba(241,239,233,.15);
   display:flex; flex-wrap:wrap; gap:16px; justify-content:space-between;
