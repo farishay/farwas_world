@@ -72,7 +72,7 @@ export default async function handler(req, res) {
     res.end("Internal Server Error");
   }
 }
-`.trimStart()
+`.trimStart(),
 );
 
 // Write the function configuration
@@ -86,8 +86,8 @@ writeFileSync(
       shouldAddHelpers: true,
     },
     null,
-    2
-  )
+    2,
+  ),
 );
 
 // ── 3. Top-level Vercel output config ─────────────────────────────────────────
@@ -114,8 +114,10 @@ writeFileSync(
       ],
     },
     null,
-    2
-  )
+    2,
+  ),
 );
 
-console.log("✓ Vercel Build Output API v3 artifacts written to .vercel/output/");
+console.log(
+  "✓ Vercel Build Output API v3 artifacts written to .vercel/output/",
+);
