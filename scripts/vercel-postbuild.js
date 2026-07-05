@@ -132,5 +132,6 @@ writeFileSync(
   ),
 );
 
-console.log("✓ Vercel Build Output API v3 artifacts written to .vercel/output/");
-
+console.log(
+  "✓ Vercel Build Output API v3 artifacts written to .vercel/output/",
+);
