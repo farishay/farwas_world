@@ -1147,8 +1147,10 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, .mag-root::-webkit-scrollbar{ 
   background:radial-gradient(circle at 30% 40%, rgba(161,31,31,.12), transparent 60%);
 }
 .cover-b-portrait{
-   display:flex; align-items:flex-end; justify-content:center;
-  height:min(92vh,900px);
+  display:flex; 
+  align-items:flex-end; 
+  justify-content:center;
+  height:100%;
   position:relative;
 }
 .cover-b-portrait::after{
@@ -1205,7 +1207,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, .mag-root::-webkit-scrollbar{ 
   .cover-b{ grid-template-columns:1fr; padding:56px var(--gutter); text-align:center; }
   .cover-b-cta{ justify-content:center; }
   .cover-b-stats{ justify-content:center; }
-  .cover-b-portrait{ height:60vh; }
+  .cover-b-portrait{ height:100%; width: 100%; }
 }
 
 /* ---------- STRIP ---------- */
