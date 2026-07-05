@@ -3,15 +3,14 @@ import { useEffect, useRef, useState } from "react";
 import coverPortraitImage from "../assets/cover-portrait.jpeg";
 import sittingImage from "../assets/sitting.jpeg";
 import standingImage from "../assets/standing.jpeg";
-
 import P1 from "../assets/p1.jpeg";
 import P2 from "../assets/p2.jpeg";
 import P3 from "../assets/p3.jpeg";
 import P4 from "../assets/p4.jpeg";
 import P5 from "../assets/p5.jpg";
-import P6 from "../assets/p6.jpg";
+import P6 from "../assets/p6.jpeg";
 import P7 from "../assets/p7.jpg";
-import P8 from "../assets/p8.jpg";
+import P8 from "../assets/p8.jpeg";
 import P9 from "../assets/p9.jpg";
 
 const coverPortrait = { url: coverPortraitImage };
