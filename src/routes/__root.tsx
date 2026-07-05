@@ -4,12 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { type ReactNode } from "react";
-
-import appCss from "../style.css?url";
 
 function NotFoundComponent() {
   return (
@@ -73,71 +68,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
-    head: () => ({
-      meta: [
-        { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "FarwaTariq" },
-        {
-          name: "description",
-          content:
-            "Revive your old portfolio with new content and a modern design.",
-        },
-        { name: "author", content: "Farwa Tariq" },
-        { property: "og:title", content: "FarwaTariq" },
-        {
-          property: "og:description",
-          content:
-            "Revive your old portfolio with new content and a modern design.",
-        },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-        { name: "twitter:site", content: "@FarwaTariq" },
-        { name: "twitter:title", content: "FarwaTariq" },
-        {
-          name: "twitter:description",
-          content:
-            "Revive your old portfolio with new content and a modern design.",
-        },
-        {
-          property: "og:image",
-          content:
-            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/061e0719-b383-453f-a437-747a8de33663/id-preview-70b66b7a--1c3321c9-ebe3-484e-9d29-af6dd101f21a.lovable.app-1783081351640.png",
-        },
-        {
-          name: "twitter:image",
-          content:
-            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/061e0719-b383-453f-a437-747a8de33663/id-preview-70b66b7a--1c3321c9-ebe3-484e-9d29-af6dd101f21a.lovable.app-1783081351640.png",
-        },
-      ],
-      links: [
-        {
-          rel: "stylesheet",
-          href: appCss,
-        },
-        { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
-      ],
-    }),
-    shellComponent: RootShell,
     component: RootComponent,
     notFoundComponent: NotFoundComponent,
     errorComponent: ErrorComponent,
   },
 );
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
