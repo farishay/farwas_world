@@ -1136,7 +1136,8 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, .mag-root::-webkit-scrollbar{ 
 /* ---------- COVER (BLACK HERO) ---------- */
 .cover-b{
   background:#0a0a0a; color:#f1efe9;
-  min-height:100vh; padding:80px var(--gutter);
+  min-height:100vh; 
+  padding-right:20px;
   display:grid; grid-template-columns:1.1fr 1fr; gap:56px;
   align-items:center;
   position:relative; overflow:hidden;
