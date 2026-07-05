@@ -1204,10 +1204,11 @@ html::-webkit-scrollbar, body::-webkit-scrollbar, .mag-root::-webkit-scrollbar{ 
   color:#86847a; text-transform:uppercase;
 }
 @media(max-width:900px){
-  .cover-b{ grid-template-columns:1fr; padding:56px var(--gutter); text-align:center; }
+  .cover-b{ grid-template-columns:1fr; 
+  text-align:center; padding: 0 !important; }
   .cover-b-cta{ justify-content:center; }
   .cover-b-stats{ justify-content:center; }
-  .cover-b-portrait{ height:100%; width: 100%; }
+  .cover-b-portrait{ height:80vh; width: 100%; }
 }
 
 /* ---------- STRIP ---------- */
