@@ -4,11 +4,20 @@ import coverPortraitImage from "../assets/cover-portrait.jpeg";
 import sittingImage from "../assets/sitting.jpeg";
 import standingImage from "../assets/standing.jpeg";
 
+import P1 from "../assets/p1.jpeg";
+import P2 from "../assets/p2.jpeg";
+import P3 from "../assets/p3.jpeg";
+import P4 from "../assets/p4.jpeg";
+import P5 from "../assets/p5.jpg";
+import P6 from "../assets/p6.jpg";
+import P7 from "../assets/p7.jpg";
+import P8 from "../assets/p8.jpg";
+import P9 from "../assets/p9.jpg";
+
 const coverPortrait = { url: coverPortraitImage };
 const sitting = { url: sittingImage };
 const standing = { url: standingImage };
 
-// @ts-ignore TanStack Router sometimes reports this as a stale editor-only type mismatch.
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -41,7 +50,7 @@ const projects = [
   {
     title: "Stroke — The Digital Sketchbook",
     tag: "AI / CREATIVE",
-    img: "src/assets/p1.jpeg",
+    img: P1,
     desc: "An interactive AI-powered drawing platform that lets users generate creative visuals effortlessly. Real-time outputs, smart interactions, and a modern interface that blends creativity with technology.",
     stack: ["GSAP", "React", "CSS Modules", "Llama 3.1 8B"],
     link: "https://stroke-app-drab.vercel.app/",
@@ -49,7 +58,7 @@ const projects = [
   {
     title: "Mizaaj — The Food Website",
     tag: "RESTAURANT",
-    img: "src/assets/p2.jpeg",
+    img: P2,
     desc: "A modern, responsive food website with clean UI, smooth navigation and an engaging layout that showcases menu and services. Built for aesthetics, performance and user interaction.",
     stack: ["React", "GSAP", "Tailwind"],
     link: "https://mizaaj-restaurant.netlify.app/",
@@ -57,7 +66,7 @@ const projects = [
   {
     title: "AIMailPro — Email Marketing",
     tag: "SAAS",
-    img: "src/assets/p3.jpeg",
+    img: P3,
     desc: "Advanced email marketing automation with a drag-and-drop builder and an analytics dashboard. Built for marketers who want to move fast without giving up control.",
     stack: ["React", "GSAP"],
     link: "https://ai-mail-pro-v2.vercel.app/",
@@ -66,7 +75,7 @@ const projects = [
   {
     title: "Resume Forge — Resume Builder",
     tag: "TOOL",
-    img: "src/assets/p4.jpeg",
+    img: P4,
     desc: "Create stunning resumes in minutes with customizable templates, live preview and one-click export to PDF.",
     stack: ["React.js", "PDF", "HTML2Canvas", "CSS"],
     link: "https://resume-forge-v2.netlify.app/",
@@ -74,7 +83,7 @@ const projects = [
   {
     title: "Coffee Chat App",
     tag: "SOCIAL",
-    img: "src/assets/p5.jpg",
+    img: P5,
     desc: "Cozy, coffee-themed chat application with real-time messaging, emoji reactions and a warm aesthetic that makes people want to stay a while.",
     stack: ["HTML", "CSS", "JS", "Firebase", "Tailwind"],
     link: "https://chat-app-mu-nine-69.vercel.app/",
@@ -83,7 +92,7 @@ const projects = [
   {
     title: "RSSC — Rangers Shooting & Saddle Club",
     tag: "HOSPITALITY / EVENTS",
-    img: "src/assets/p6.jpeg",
+    img: P6,
     desc: "Pakistan's premier shooting club website with cinematic dark UI, membership flows, facility showcases and night-shoot bookings. Bold typography meets precision.",
     stack: ["React", "GSAP", "Tailwind"],
     link: "https://rssc-shooting-range.vercel.app/",
@@ -91,7 +100,7 @@ const projects = [
   {
     title: "Adéna — Holistic Skincare",
     tag: "E-COMMERCE / WELLNESS",
-    img: "src/assets/p7.jpg",
+    img: P7,
     desc: "A serene, product-forward skincare storefront blending organic aesthetics with modern shopping flows. Soft gradients, delicate typography and a calming palette.",
     stack: ["React", "Tailwind", "GSAP"],
     link: "https://adena-skincaree.netlify.app/",
@@ -99,7 +108,7 @@ const projects = [
   {
     title: "Client Portfolio — Saqlain Ahmed",
     tag: "PORTFOLIO",
-    img: "src/assets/p8.jpeg",
+    img: P8,
     desc: "Dark-mode graphic designer portfolio with animated typewriter headings, circular profile layout and red-accent branding. Built to make a first impression.",
     stack: ["HTML", "CSS", "JavaScript"],
     link: "https://client-portfolio-zeta-ivory.vercel.app/",
@@ -107,7 +116,7 @@ const projects = [
   {
     title: "Turkana — Anatolian Journal",
     tag: "EDITORIAL / TRAVEL",
-    img: "src/assets/p9.jpg",
+    img: P9,
     desc: "A slow-journalism travel magazine platform inspired by Anatolia. Rich imagery, editorial layouts and destination storytelling across Istanbul, Cappadocia and beyond.",
     stack: ["React", "Tailwind", "GSAP"],
     link: "https://farishay-turkana.vercel.app/",
@@ -291,9 +300,15 @@ function Index() {
       <main className="mag-main">
         {/* COVER / HOME — black BG, full portrait, centered */}
         <section id="top" className="cover-b">
-          <div className="cover-b-portrait">
-            <img src={coverPortrait.url} alt="Farwa Tariq" />
-          </div>
+          <div
+            className="cover-b-portrait"
+            style={{
+              backgroundImage: `url(${coverPortrait.url})`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          />
 
           <div className="cover-b-content">
             <span className="eyebrow" data-reveal>
