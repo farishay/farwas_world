@@ -2,9 +2,11 @@
 // Transforms TanStack Start build output into Vercel Build Output API v3 format.
 // Docs: https://vercel.com/docs/build-output-api/v3
 
-import { cpSync, mkdirSync, writeFileSync, readFileSync } from "node:fs";
+import { mkdirSync, writeFileSync, rmSync } from "node:fs";
+import { cpSync } from "node:fs";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
+import { build } from "esbuild";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..");
@@ -18,16 +20,12 @@ cpSync(resolve(root, "dist/client"), staticOut, { recursive: true });
 const funcDir = resolve(root, ".vercel/output/functions/index.func");
 mkdirSync(funcDir, { recursive: true });
 
-// Copy the entire dist/server directory into the function bundle
-cpSync(resolve(root, "dist/server"), resolve(funcDir, "dist/server"), {
-  recursive: true,
-});
-
-// Write the function entry point
+// Write the function entry point (adapter: Node.js HTTP → Web Fetch API)
+const entrySource = resolve(root, "scripts/_vercel-handler-entry.js");
 writeFileSync(
-  resolve(funcDir, "index.js"),
+  entrySource,
   `
-import server from "./dist/server/server.js";
+import server from "../dist/server/server.js";
 
 export default async function handler(req, res) {
   const protocol = req.headers["x-forwarded-proto"] || "https";
@@ -75,6 +73,22 @@ export default async function handler(req, res) {
 `.trimStart(),
 );
 
+// Bundle the server + all node_modules into a single self-contained file
+await build({
+  entryPoints: [entrySource],
+  bundle: true,
+  outfile: resolve(funcDir, "index.js"),
+  platform: "node",
+  format: "esm",
+  // Keep Node built-ins external (they're always available on Vercel)
+  external: ["node:*"],
+  // Suppress "use client" / "use server" directive warnings from React packages
+  logOverride: { "ignored-bare-use": "silent" },
+});
+
+// Clean up temp entry source
+rmSync(entrySource, { force: true });
+
 // Write the function configuration
 writeFileSync(
   resolve(funcDir, ".vc-config.json"),
@@ -118,6 +132,5 @@ writeFileSync(
   ),
 );
 
-console.log(
-  "✓ Vercel Build Output API v3 artifacts written to .vercel/output/",
-);
+console.log("✓ Vercel Build Output API v3 artifacts written to .vercel/output/");
+
